@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  /* --background:#2B3E50; */
+  --background: #011532e7;
+  --background-light: #e6e6e6;
+  --font-dark: #01142f;
+  --button-blue: #012965;
+  --button-blue-hover: #011f4c;
+  --sans-montserrat: "Montserrat", system-ui, sans-serif;
+  --roboto-condensed: "Roboto Condensed", sans-serif;
+  --accent-yellow: #d6b86b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-button-blue: var(--button-blue);
+  --color-button-blue-hover: var(--button-blue-hover);
+  --color-background: var(--background);
+  --color-background-light: var(--background-light);
+  --font-sans: var(--font-monserrat);
+  /* --font-mono: var(--roboto-condensed); */
+  /* --font-mono: var(--font-roboto); */
+  --color-font-dark: var(--font-dark);
+  --color-accent-yellow: var(--accent-yellow);
+}
+
+html {
+  font-family: var(--sans-montserrat);
+  scroll-behavior: smooth;
+  background-color: var(--color-background);
+    overflow-y: scroll !important;
+    padding-right: 0px !important;
+}
+@layer {
+  .input {
+    @apply bg-background/30 px-2 border border-gray-500 h-8 rounded-md;
+  }
+  .button-blue {
+    @apply px-3 py-2 border border-transparent  my-5 cursor-pointer rounded-md text-sm font-medium bg-blue-900 hover:border-blue-50 hover:bg-transparent text-gray-50 transition active:scale-95 disabled:bg-gray-400 disabled:text-gray-200  disabled:active:scale-100 disabled:border-transparent disabled:cursor-not-allowed disabled:hover:bg-gray-400;
+  }
+  .button-gray {
+    @apply px-3 py-2 border border-transparent rounded-md text-sm font-medium bg-blue-900 hover:border-blue-50 
+            hover:bg-transparent text-gray-50 transition active:scale-95;
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(200deg);
+  cursor: pointer;
+}

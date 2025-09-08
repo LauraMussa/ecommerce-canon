@@ -1,0 +1,95 @@
+import Link from "next/link";
+const user = true;
+import { callouts } from "@/helpers/callouts";
+
+export default function Categ() {
+  return (
+    <div id="categories">
+      <div className="mx-auto mt-45 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none">
+          <h2 className="text-4xl font-bold text-blue-50 mb-5">
+            Shop by Category
+          </h2>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-4">
+   
+            <Link
+              href={user ? callouts[0].href : "/login"}
+              className="relative group cursor-pointer lg:col-span-2"
+            >
+              <img
+                src={callouts[0].imageSrc}
+                alt={callouts[0].imageAlt}
+                className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
+              />
+              <div className="absolute bottom-4 left-4 text-white">
+                <h3 className="text-lg font-semibold">{callouts[0].name}</h3>
+                <p className="text-sm">{callouts[0].description}</p>
+              </div>
+            </Link>
+
+            <Link
+              href={user ? callouts[1].href : "/login"}
+              className="relative group cursor-pointer"
+            >
+              <img
+                src={callouts[1].imageSrc}
+                alt={callouts[1].imageAlt}
+                className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
+              />
+              <div className="absolute bottom-4 left-4 text-white">
+                <h3 className="text-lg font-semibold">{callouts[1].name}</h3>
+                <p className="text-sm">{callouts[1].description}</p>
+              </div>
+            </Link>
+
+            <Link
+              href={user ? callouts[2].href : "/login"}
+              className="relative group cursor-pointer lg:col-span-2"
+            >
+              <img
+                src={callouts[2].imageSrc}
+                alt={callouts[2].imageAlt}
+                className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
+              />
+              <div className="absolute bottom-4 left-4 text-white">
+                <h3 className="text-lg font-semibold">{callouts[2].name}</h3>
+                <p className="text-sm">{callouts[2].description}</p>
+              </div>
+            </Link>
+
+            <Link
+              href={user ? callouts[3].href : "/login"}
+              className="relative group cursor-pointer"
+            >
+              <img
+                src={callouts[3].imageSrc}
+                alt={callouts[3].imageAlt}
+                className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
+              />
+              <div className="absolute bottom-4 left-4 text-white">
+                <h3 className="text-lg font-semibold">{callouts[3].name}</h3>
+                <p className="text-sm">{callouts[3].description}</p>
+              </div>
+            </Link>
+
+            <Link
+              href={user ? callouts[4].href : "/login"}
+              className="relative group cursor-pointer lg:col-span-3"
+            >
+              <img
+                src={callouts[4].imageSrc}
+                alt={callouts[4].imageAlt}
+                className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
+              />
+              <div className="absolute bottom-4 left-4 text-white">
+                <h3 className="text-lg font-semibold">{callouts[4].name}</h3>
+                <p className="text-sm">{callouts[4].description}</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
