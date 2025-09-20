@@ -4,6 +4,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const getAllProducts = async () => {
   try {
+ 
     const products = await fetch(`${apiUrl}/products`);
     if (!products) throw Error;
     return products.json();
