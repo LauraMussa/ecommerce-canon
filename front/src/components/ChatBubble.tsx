@@ -7,10 +7,9 @@ const ChatBubble = () => {
 
   return (
     <>
-      {/* Botón flotante */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-blue-800 text-blue-50 shadow-lg hover:bg-blue-700 transition"
+        className="cursor-pointer fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-blue-800 text-blue-50 shadow-lg hover:bg-blue-700 transition"
       >
         {isOpen ? (
           <FiX className="w-6 h-6" />
@@ -25,14 +24,12 @@ const ChatBubble = () => {
             Support Chat
           </div>
 
-          {/* Mensajes fake */}
           <div className="flex-1 p-4 space-y-3 overflow-y-auto text-sm text-gray-800">
             <div className="bg-gray-200 rounded-lg p-2 max-w-[80%]">
               Hello! 👋 How can we help you today?
             </div>
           </div>
 
-          {/* Input simulado */}
           <div className="border-t px-3 py-2 flex items-center">
             <input
               type="text"

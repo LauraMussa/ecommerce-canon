@@ -1,11 +1,12 @@
 import { getProductById } from "@/services/product.service";
 import { ProductProps } from "@/types/products/ProductProps";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import Loader from "./Loader/Loader";
+import { useCart } from "@/context/CartContext";
 const ProductDetailCard = ({ id }: { id: string }) => {
+  const { addToCart } = useCart();
   const [product, setProduct] = useState<ProductProps | null>(null);
   useEffect(() => {
     const fetchProduct = async () => {
@@ -14,7 +15,6 @@ const ProductDetailCard = ({ id }: { id: string }) => {
     };
     fetchProduct();
   }, [id]);
-  console.log("image:", product?.image);
 
   let oldPrice = 0;
   product?.price && (oldPrice = product?.price + 500);
@@ -40,17 +40,19 @@ const ProductDetailCard = ({ id }: { id: string }) => {
               </div>
 
               <div className="mb-6">
-                <p className="line-through text-gray-400 text-xl">${oldPrice}</p>
+                <p className="line-through text-gray-400 text-xl">
+                  ${oldPrice}
+                </p>
                 <p className="text-3xl font-bold ">${product.price}</p>
               </div>
 
-              <Link
-                href={"/cart"}
+              <button
+                onClick={() => addToCart(product)}
                 className="w-[fit-content] border border-transparent hover:bg-transparent bg-blue-800 text-blue-50 hover:border-blue-50 cursor-pointer flex items-center gap-1 px-8 py-3 rounded-full font-semibold text-lg transition"
               >
                 <span>Add</span>
                 <HiOutlineShoppingBag className="relative -top-[2px]" />
-              </Link>
+              </button>
             </div>
 
             <div className="w-full md:w-1/2 relative flex items-center justify-center bg-gradient-to-br from-gray-900/40 to-[#264269] rounded-l-full p-26">
@@ -60,7 +62,7 @@ const ProductDetailCard = ({ id }: { id: string }) => {
                   height={200}
                   src={`${product.image}`}
                   alt={`${product.name}`}
-                  className=" max-w-lg object-contain drop-shadow-2xl"
+                  className=" max-w-lg object-a drop-shadow-2xl"
                 />
               ) : (
                 <Loader />

@@ -1,10 +1,43 @@
+"use client";
 //Next
+import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/UserContext";
+import { getProductById } from "@/services/product.service";
+import { ProductProps } from "@/types/products/ProductProps";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 //Icons
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 const FeaturedProduct = () => {
+  const { user } = useAuth();
+  const { addToCart, error, setError } = useCart();
+  const [product, setProduct] = useState<ProductProps | null>(null);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      // setLoading(true)
+      try {
+        const res = await getProductById("2");
+        if (!res) {
+          console.log(res);
+          
+          throw new Error("Product not found");
+        } else {
+          setProduct(res);
+        }
+        console.log("RES: ", res);
+      } catch (error) {
+        console.log(error);
+        setError(error as string);
+        throw new Error("Error loading product");
+      } finally {
+        // setLoading(false)
+      }
+    };
+    getProduct();
+  }, []);
   return (
     <div className="max-w-[82rem] text-blue-50 rounded-3xl overflow-hidden mx-auto mt-45 bg-gray-900/70">
       <section className=" w-full justify-between flex items-center overflow-hidden ">
@@ -18,16 +51,19 @@ const FeaturedProduct = () => {
           </p>
           <div className="flex items-center justify-center gap-3 my-3 font-light ">
             <Link
-              href={`/product/3`}
+              href={`/product/${product?.id}`}
               className="gap-1 flex text-lg transition duration-200  text-blue-50 w-[fit-content] px-3 py-0.5 rounded-lg bg-blue-800 hover:bg-transparent hover:border-blue-50 border-transparent border"
             >
               <span>Product Details</span>
             </Link>
 
-            <Link href="/login" className="flex items-center  gap-1   ">
+            <button
+              onClick={() => product && addToCart(product)}
+              className="flex cursor-pointer items-center  gap-1   "
+            >
               <span className="text-lg hover:underline">Add</span>
               <HiOutlineShoppingBag size={18} className="relative -top-[2px]" />
-            </Link>
+            </button>
           </div>
         </div>
         <div className="">

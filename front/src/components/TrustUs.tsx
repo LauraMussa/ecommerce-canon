@@ -5,7 +5,6 @@ import {
   ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { FaHeartPulse } from "react-icons/fa6";
 
 export default function TrustSection() {
   const features = [

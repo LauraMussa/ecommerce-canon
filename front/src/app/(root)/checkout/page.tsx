@@ -1,10 +1,10 @@
-import UserDashboard from "@/components/UserDashboard";
+import Checkout from "@/components/Checkout";
 import React from "react";
 
 const page = () => {
   return (
-    <div >
-      <UserDashboard />
+    <div>
+      <Checkout />
     </div>
   );
 };

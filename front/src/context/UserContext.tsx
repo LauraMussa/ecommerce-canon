@@ -1,98 +1,81 @@
 "use client";
 
-import { loginUser, registerUser } from "@/services/user.service";
-import { LoginType } from "@/validators/loginSchema";
-import { RegisterType } from "@/validators/registerSchema";
 import {
-  createContext,
-  useState,
-  ReactNode,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from "react";
+  getLocalStorage,
+  removeLocalStorage,
+  saveLocalStorage,
+} from "@/hooks/localStorage";
+import { createContext, useState, useEffect, useContext } from "react";
+import { useCart } from "./CartContext";
 
 interface User {
-  id: number;
-  name: string;
-  email: string;
-  address: string;
-  phone: string;
-  password: string;
+  login: boolean;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    address: string;
+    phone: string;
+    role: string;
+    credentials: {
+      id: number;
+      password: string;
+    };
+    orders: [];
+  };
+  token: string;
+}
+
+interface UserProviderProps {
+  children: React.ReactElement;
 }
 
 interface UserContextType {
   user: User | null;
   setUser: (u: User | null) => void;
-  login: (values: LoginType) => void;
-  register: (values: RegisterType) => void;
-  loading: boolean;
-  setToken: Dispatch<SetStateAction<string | null>>;
-  token: string | null;
+  logout: () => void;
 }
 
+//valores iniciales
 export const UserContext = createContext<UserContextType>({
   user: null,
   setUser: () => {},
-  login: async () => {},
-  register: async () => {},
-  loading: true,
-  setToken: () => {},
-  token: null,
+  logout: () => {},
 });
-export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
 
-  const [loading, setLoading] = useState(true);
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const { clearCart } = useCart();
+  useEffect(() => {
+    if (user) {
+      saveLocalStorage("user", user);
+    }
+  }, [user]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("user");
-    const userToken = localStorage.getItem("userToken");
-    if (saved) {
-      try {
-        setUser(JSON.parse(saved));
-        setToken(userToken);
-        setLoading(false);
-      } catch {
-        localStorage.removeItem("user");
-        localStorage.removeItem("userToken");
+    if (typeof window !== "undefined" && window.localStorage) {
+      const dataUser = getLocalStorage("user");
+      if (dataUser) {
+        setUser(JSON.parse(dataUser));
       }
     }
   }, []);
 
-  const login = async (values: LoginType) => {
-    try {
-      const dataUser = await loginUser(values);
-      localStorage.setItem("userToken", dataUser.token);
-      localStorage.setItem("user", JSON.stringify(dataUser.user));
-      console.log("mi user", localStorage.getItem("user"));
-      console.log("mi user 2", user);
-
-      setUser(dataUser.user);
-      return dataUser;
-    } catch (err: any) {
-      console.log(err);
-      throw err;
+  const logout = () => {
+    setUser(null);
+    clearCart();
+    if (typeof window !== "undefined" && window.localStorage) {
+      removeLocalStorage("user");
+      removeLocalStorage("cart");
+      window.location.reload();
     }
   };
-
-  const register = async (values: RegisterType) => {
-    try {
-      const dataUser = await registerUser(values);
-      localStorage.setItem("user", JSON.stringify(dataUser.user));
-      setUser(dataUser.user);
-      return dataUser;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
+  const values = {
+    user,
+    setUser,
+    logout,
   };
-  return (
-    <UserContext.Provider
-      value={{ user, setUser, register, login, loading, setToken, token }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
 };
+
+export const useAuth = () => useContext(UserContext);

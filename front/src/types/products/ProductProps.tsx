@@ -9,9 +9,10 @@ export interface ProductProps {
 }
 
 export interface ProductList {
-  productsArray: ProductProps[];
+  products: ProductProps[];
 }
 
 export interface ParamProps {
   params: { id: string };
 }
+

@@ -1,9 +1,10 @@
 import { LoginType } from "@/validators/loginSchema";
 import { RegisterType } from "@/validators/registerSchema";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const loginUser = async (values: LoginType) => {
   try {
-    const res = await fetch("http://localhost:3001/users/login", {
+    const res = await fetch(`${apiUrl}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +28,7 @@ export const loginUser = async (values: LoginType) => {
 
 export const registerUser = async (values: RegisterType) => {
   try {
-    const res = await fetch("http://localhost:3001/users/register", {
+    const res = await fetch(`${apiUrl}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

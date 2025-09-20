@@ -1,8 +1,11 @@
+"use client";
 import Link from "next/link";
-const user = true;
-import { callouts } from "@/helpers/callouts";
 
-export default function Categ() {
+import { callouts } from "@/helpers/callouts";
+import { useAuth } from "@/context/UserContext";
+
+export default function Categories() {
+  const { user } = useAuth();
   return (
     <div id="categories">
       <div className="mx-auto mt-45 max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -12,9 +15,8 @@ export default function Categ() {
           </h2>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-4">
-   
             <Link
-              href={user ? callouts[0].href : "/login"}
+              href={user ? callouts[0].href : `/categories/${1}`}
               className="relative group cursor-pointer lg:col-span-2"
             >
               <img
@@ -29,7 +31,7 @@ export default function Categ() {
             </Link>
 
             <Link
-              href={user ? callouts[1].href : "/login"}
+              href={user ? callouts[1].href : `/categories/${3}`}
               className="relative group cursor-pointer"
             >
               <img
@@ -44,7 +46,7 @@ export default function Categ() {
             </Link>
 
             <Link
-              href={user ? callouts[2].href : "/login"}
+              href={user ? callouts[2].href : `/categories/${2}`}
               className="relative group cursor-pointer lg:col-span-2"
             >
               <img
@@ -59,7 +61,7 @@ export default function Categ() {
             </Link>
 
             <Link
-              href={user ? callouts[3].href : "/login"}
+              href={user ? callouts[3].href : `/categories/${4}`}
               className="relative group cursor-pointer"
             >
               <img
@@ -74,7 +76,7 @@ export default function Categ() {
             </Link>
 
             <Link
-              href={user ? callouts[4].href : "/login"}
+              href={user ? callouts[4].href : `/categories/${4}`}
               className="relative group cursor-pointer lg:col-span-3"
             >
               <img

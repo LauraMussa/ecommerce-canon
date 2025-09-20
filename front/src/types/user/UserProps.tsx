@@ -1,3 +1,5 @@
+import { ProductProps } from "../products/ProductProps";
+
 export interface UserProps {
   id: number;
   name: string;
@@ -24,8 +26,8 @@ export interface PaymentMethod {
 }
 export interface Order {
   id: number;
-  name: string;
   total: number;
   date: string;
   status: string;
+  products: ProductProps[];
 }

@@ -30,8 +30,8 @@ html {
   font-family: var(--sans-montserrat);
   scroll-behavior: smooth;
   background-color: var(--color-background);
-    overflow-y: scroll !important;
-    padding-right: 0px !important;
+  overflow-y: scroll !important;
+  padding-right: 0px !important;
 }
 @layer {
   .input {

@@ -17,8 +17,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useContext } from "react";
-import { UserContext } from "@/context/UserContext";
+import { useAuth } from "@/context/UserContext";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -31,16 +30,8 @@ const navigationUser = [
   { name: "Dashboard", href: "/dashboard" },
 ];
 export default function Navbar() {
+  const { user, logout } = useAuth();
   const pathname = usePathname();
-  const { setUser, setToken } = useContext(UserContext);
-
-  const logout = () => {
-    localStorage.removeItem("userToken");
-    localStorage.removeItem("user");
-    setUser(null);
-    setToken(null);
-    window.location.reload();
-  };
   return (
     <div>
       <Disclosure
@@ -75,7 +66,7 @@ export default function Navbar() {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex items-center space-x-4">
-                {localStorage.getItem("userToken") ? (
+                {user ? (
                   <>
                     {navigation.map((item) => {
                       const isActive = pathname === item.href;

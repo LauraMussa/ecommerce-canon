@@ -33,8 +33,8 @@ const products = [
       "https://res.cloudinary.com/dvgnwrkvl/image/upload/v1755817679/camara_digital_Canon_PowerShot_G7_X_Mark_III_1_-removebg-preview_dtuulh.png",
     categoryId: 1,
   },
- 
-    {
+
+  {
     id: 3,
     name: "Mini trípode PIXI",
     description:
@@ -50,8 +50,7 @@ const products = [
 const cart = () => {
   return (
     <div>
-      <Cart productsArray={products}></Cart>
-   
+      <Cart />
     </div>
   );
 };

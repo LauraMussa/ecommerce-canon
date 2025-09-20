@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatBubble from "@/components/ChatBubble";
 import { UserProvider } from "@/context/UserContext";
+import { CartProvider } from "@/context/CartContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -28,12 +29,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Navbar />
       <body className={`${roboto.variable}${montserrat.variable} antialiased`}>
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <CartProvider>
+            <>
+              <Navbar />
+              {children}
+              <ChatBubble />
+              <Footer />
+            </>
+          </CartProvider>
+        </UserProvider>
       </body>
-      <ChatBubble />
-      <Footer />
     </html>
   );
 }
