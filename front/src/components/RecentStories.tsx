@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
@@ -82,7 +83,10 @@ const RecentStories = () => {
                 }`}
               >
                 <div className="relative w-full h-[500px]">
-                  <img
+                  <Image
+
+                width={100}
+                height={100}
                     src={item.imageSrc}
                     alt={item.imageAlt}
                     className="absolute inset-0 w-full h-full object-cover"

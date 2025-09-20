@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/UserContext";
 import { loginUser } from "@/services/user.service";
 import Loader from "./Loader/Loader";
+import Image from "next/image";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -34,9 +35,9 @@ const Login = () => {
         console.log("token", response.token);
 
         router.push("/");
-      } catch (err: any) {
+      } catch (err) {
         console.log(err);
-        throw err;
+        throw new Error(err as string);
       } finally {
         formik.setSubmitting(false);
       }
@@ -47,14 +48,17 @@ const Login = () => {
     if (user) {
       router.replace("/");
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>
       {!user ? (
         <>
           <Link href="/">
-            <img
+            <Image
+
+                width={100}
+                height={100}
               alt=""
               src="/images/LogoLight.svg"
               className="ml-[3rem] pt-5.5 h-10.5"

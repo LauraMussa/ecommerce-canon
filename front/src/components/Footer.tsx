@@ -1,29 +1,7 @@
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdOutlineMailOutline } from "react-icons/md";
-const footerList = [
-  {
-    country: "NEW YORK",
-    // state: "Huntersville,",
-    adress: "957 Hill Hills Suite 491, United States",
-    office: "Office: +12(3) 456 7890 1234",
-    support: "canon@gmail.com",
-  },
-  {
-    country: "ROME",
-    // state: "Piazza di Spagna,",
-    adress: "187 Roma RM, Italy",
-    office: "Office: +12(3) 456 7890 1234",
-    support: "canon@gmail.it",
-  },
-  {
-    country: "LONDON",
-    // state: "Fulham Rd,",
-    adress: "London SW6 1HS, United Kingdom",
-    office: "Office: +12(3) 456 7890 1234",
-    support: "canon@gmail.uk",
-  },
-];
+
 const Footer = () => {
   return (
     <footer className="py-8 mt-20 font-light text-blue-50 bg-gray-900/70">

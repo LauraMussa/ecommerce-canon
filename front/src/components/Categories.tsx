@@ -4,6 +4,7 @@ import Link from "next/link";
 import { callouts } from "@/helpers/callouts";
 import { useAuth } from "@/context/UserContext";
 
+import Image from "next/image";
 export default function Categories() {
   const { user } = useAuth();
   return (
@@ -19,7 +20,9 @@ export default function Categories() {
               href={user ? callouts[0].href : `/categories/${1}`}
               className="relative group cursor-pointer lg:col-span-2"
             >
-              <img
+              <Image
+                width={100}
+                height={100}
                 src={callouts[0].imageSrc}
                 alt={callouts[0].imageAlt}
                 className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
@@ -34,7 +37,9 @@ export default function Categories() {
               href={user ? callouts[1].href : `/categories/${3}`}
               className="relative group cursor-pointer"
             >
-              <img
+              <Image
+                width={100}
+                height={100}
                 src={callouts[1].imageSrc}
                 alt={callouts[1].imageAlt}
                 className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
@@ -49,7 +54,9 @@ export default function Categories() {
               href={user ? callouts[2].href : `/categories/${2}`}
               className="relative group cursor-pointer lg:col-span-2"
             >
-              <img
+              <Image
+                width={100}
+                height={100}
                 src={callouts[2].imageSrc}
                 alt={callouts[2].imageAlt}
                 className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
@@ -64,7 +71,9 @@ export default function Categories() {
               href={user ? callouts[3].href : `/categories/${4}`}
               className="relative group cursor-pointer"
             >
-              <img
+              <Image
+                width={100}
+                height={100}
                 src={callouts[3].imageSrc}
                 alt={callouts[3].imageAlt}
                 className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"
@@ -79,7 +88,9 @@ export default function Categories() {
               href={user ? callouts[4].href : `/categories/${4}`}
               className="relative group cursor-pointer lg:col-span-3"
             >
-              <img
+              <Image
+                width={100}
+                height={100}
                 src={callouts[4].imageSrc}
                 alt={callouts[4].imageAlt}
                 className="w-full h-80 object-cover rounded-lg group-hover:opacity-75"

@@ -44,7 +44,7 @@ export default function WhatsNew() {
   return (
     <section className="text-blue-50 mt-45  bg-gray-900/70 py-16">
       <div className="max-w-8xl mx-auto px-6 ">
-        <h2 className="text-3xl mx-4 mb-5 ">What's New at Canon</h2>
+        <h2 className="text-3xl mx-4 mb-5 ">What&#39;s New at Canon</h2>
         <div className="grid gap-8 md:grid-cols-2 ">
           {features.map((item, idx) => {
             return (

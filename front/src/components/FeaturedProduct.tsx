@@ -1,7 +1,6 @@
 "use client";
 //Next
 import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context/UserContext";
 import { getProductById } from "@/services/product.service";
 import { ProductProps } from "@/types/products/ProductProps";
 import Image from "next/image";
@@ -11,8 +10,7 @@ import { useEffect, useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 const FeaturedProduct = () => {
-  const { user } = useAuth();
-  const { addToCart, error, setError } = useCart();
+  const { addToCart, } = useCart();
   const [product, setProduct] = useState<ProductProps | null>(null);
 
   useEffect(() => {
@@ -30,7 +28,6 @@ const FeaturedProduct = () => {
         console.log("RES: ", res);
       } catch (error) {
         console.log(error);
-        setError(error as string);
         throw new Error("Error loading product");
       } finally {
         // setLoading(false)

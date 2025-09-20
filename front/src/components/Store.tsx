@@ -16,12 +16,13 @@ export default function Store() {
         setProductList(products);
         setError(null);
       } catch (error) {
+        console.log(error);
+
         setError("Error loading products");
-        console.log("ento al catch");
       }
     };
     getProducts();
-  }, []);
+  }, [setError]);
 
   return (
     <>

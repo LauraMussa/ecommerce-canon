@@ -8,7 +8,7 @@ const NotFound = () => {
         <span className="text-3xl ">404</span>
         <h2 className="text-[8rem] font-bold">Page not found</h2>
         <p className="mb-8 text-xl tracking-wider font-bold text-gray-300/70">
-          Sorry, we couldn't find the page you're looking for.
+          Sorry, we couldn&#39;t find the page you&#39;re looking for.
         </p>
         <Link
           href="/"

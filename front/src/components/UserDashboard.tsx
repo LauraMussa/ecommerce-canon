@@ -3,15 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import Loader from "./Loader/Loader";
-import { getOrders } from "@/services/orders.services";
+import { getOrders } from "@/services/orders.service";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
-const paymentMethods = [
-  { name: "Credit Card", type: "Visa", last4: "1234" },
-  { name: "PayPal" },
-];
-
 import { IoReload } from "react-icons/io5";
+import Image from "next/image";
 export default function UserDashboard() {
   const { user } = useAuth();
   const { orders, setOrders, setError, error } = useCart();
@@ -21,18 +17,21 @@ export default function UserDashboard() {
     if (!user) {
       router.replace("/login");
     }
-  }, [user]);
+  }, [user, router]);
 
   const [show, setShow] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const ordersList = await getOrders(user?.token!);
+        if (!user?.token) {
+          throw Error("Token not found");
+        }
+        const ordersList = await getOrders(user?.token);
         setOrders(ordersList);
         setError(null);
       } catch (error) {
-        setError(`Error loading orders`);
+        if (error) setError(`Error loading orders`);
         console.log(error);
       } finally {
         // setLoading(false);
@@ -40,7 +39,7 @@ export default function UserDashboard() {
     };
 
     fetchOrders();
-  }, [user?.token]);
+  }, [user?.token, setError, setOrders]);
 
   const totalOrder = (id: number) => {
     const order = orders.find((o) => o.id === id);
@@ -62,7 +61,9 @@ export default function UserDashboard() {
       {user ? (
         <div className="min-h-screen bg-slate-900 text-blue-50 flex flex-col mx-20 rounded-2xl mt-10">
           <section className="flex flex-col items-center text-center p-6">
-            <img
+            <Image
+              width={100}
+              height={100}
               src="https://images.unsplash.com/photo-1484608856193-968d2be4080e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80"
               alt="profile picture"
               className="w-24 h-24 rounded-full object-cover border-4 border-orange-300 shadow-md"
@@ -91,15 +92,15 @@ export default function UserDashboard() {
             <div className=" gap-4 flex flex-col ">
               {error ? (
                 <div className=" flex  flex-col  gap-3 justify-center items-center text-blue-50 ">
-            <p className="text-red-500 text-2xl p-4">{error}</p>
-            <button
-              className=" flex items-center gap-2 cursor-pointer py-2 px-4 bg-slate-600 rounded-lg hover:bg-slate-500"
-              onClick={() => window.location.reload()}
-            >
-              Reload
-              <IoReload />
-            </button>
-          </div>
+                  <p className="text-red-500 text-2xl p-4">{error}</p>
+                  <button
+                    className=" flex items-center gap-2 cursor-pointer py-2 px-4 bg-slate-600 rounded-lg hover:bg-slate-500"
+                    onClick={() => window.location.reload()}
+                  >
+                    Reload
+                    <IoReload />
+                  </button>
+                </div>
               ) : orders.length > 0 ? (
                 orders.map((order) => {
                   const isOpen = show === order.id;

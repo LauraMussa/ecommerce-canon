@@ -8,7 +8,7 @@ import { GoTrash } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import Loader from "./Loader/Loader";
 import { useCart } from "@/context/CartContext";
-
+import Image from "next/image";
 const Cart = () => {
   const router = useRouter();
   const { user } = useAuth();
@@ -17,7 +17,7 @@ const Cart = () => {
 
   useEffect(() => {
     if (!user) router.replace("/login");
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>
@@ -39,7 +39,9 @@ const Cart = () => {
             {products?.length ? (
               products?.map((p) => (
                 <li key={p.id} className="flex py-6 gap-6">
-                  <img
+                  <Image
+                    width={100}
+                    height={100}
                     src={p.image}
                     alt={p.name}
                     className="h-24 w-24 bg-gray-700 p-2 rounded-md object-cover border border-gray-700"

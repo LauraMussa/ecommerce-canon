@@ -5,7 +5,8 @@ import Loader from "./Loader/Loader";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 
-import { createOrdes } from "@/services/orders.services";
+import { createOrdes } from "@/services/orders.service";
+import Image from "next/image";
 const Checkout = () => {
   const { user } = useAuth();
   const { getIdProducts, products, getTotal, clearCart } = useCart();
@@ -16,7 +17,7 @@ const Checkout = () => {
     if (!user) {
       router.replace("/");
     }
-  }, [user]);
+  }, [user, router]);
   if (!user) return <Loader />;
 
   const handleOpen = () => {
@@ -37,8 +38,12 @@ const Checkout = () => {
   };
   const handleCheckout = async () => {
     try {
-      if (products.length > 0) {
-        await createOrdes(user?.token!, getIdProducts());
+      if (!user?.token) {
+        throw new Error("No user token found");
+      }
+
+      if (products && products.length > 0) {
+        await createOrdes(user.token, getIdProducts());
       }
       clearCart();
       alert("Purchase completed successfully!");
@@ -433,11 +438,12 @@ const Checkout = () => {
               <div className="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
                 <div className="flow-root">
                   <div className="-my-3 divide-y divide-gray-200 text-blue-50 dark:divide-gray-800">
-                    {products.map((item) => {
+                    {products.map((item, index) => {
                       return (
-                        <ul>
+                        <ul key={index}>
                           <li className="flex justify-between items-center  py-3 px-2 ">
-                            <img
+                            <Image
+                              height={100}
                               src={item.image}
                               alt={item.name}
                               width={80}

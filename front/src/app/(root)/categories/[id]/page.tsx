@@ -3,7 +3,7 @@ import { ParamProps, ProductProps } from "@/types/products/ProductProps";
 import React, { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import { getProductsByCategory } from "@/services/product.service";
-const categoryId = ({ params }: ParamProps) => {
+const CategoryId = ({ params }: ParamProps) => {
   const categoryNames = [
     { name: "Cameras" },
     { name: "Camcorders" },
@@ -13,6 +13,7 @@ const categoryId = ({ params }: ParamProps) => {
   const { id } = params;
 
   const [products, setProducts] = useState<ProductProps[]>([]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -52,4 +53,4 @@ const categoryId = ({ params }: ParamProps) => {
   );
 };
 
-export default categoryId;
+export default CategoryId;

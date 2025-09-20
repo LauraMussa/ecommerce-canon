@@ -7,8 +7,6 @@ import RecentStories from "@/components/RecentStories";
 import Hero from "@/components/Hero";
 import FeaturedProduct from "@/components/FeaturedProduct";
 import Categories from "@/components/Categories";
-import { useAuth } from "@/context/UserContext";
-import Link from "next/link";
 
 const page = () => {
   return (

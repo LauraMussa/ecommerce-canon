@@ -2,7 +2,7 @@ export const callouts = [
   {
     name: "Cameras",
     description: "Shop now",
-    imageSrc: "photo-1549366359-23c135d82f08.png",
+    imageSrc: "/photo-1549366359-23c135d82f08.png",
     imageAlt: "Cameras Category",
     href: "/categories/1",
   },
@@ -19,7 +19,7 @@ export const callouts = [
     description: "Shop now",
     // imageSrc: "Camcorder.png",
     // imageSrc: "images/camcorder(5).png",
-    imageSrc: "images/camcorderNew.png",
+    imageSrc: "/images/camcorderNew.png",
     imageAlt: "Camcordes Category",
     href: "/categories/2",
   },

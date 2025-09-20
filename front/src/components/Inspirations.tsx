@@ -17,7 +17,7 @@ export const Inspirations = () => {
           <h2 className=" font-mono font-light text-sm">INSPIRATION </h2>
           <p className="text-5xl font-bold mt-5 mb-3">SHUTTER STORIES</p>
           <p>
-            Inspiring stories from the world's leading photographers and
+            Inspiring stories from the world&apos;s leading photographers and
             filmmakers.
           </p>
         </div>

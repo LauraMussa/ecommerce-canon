@@ -1,6 +1,8 @@
 import React from "react";
 import { callouts } from "@/helpers/callouts";
 import Link from "next/link";
+
+import Image from "next/image";
 const CategoriesPreviewList = () => {
   return (
     <div className="bg-  min-h-screen text-blue-50" id="categories">
@@ -17,7 +19,7 @@ const CategoriesPreviewList = () => {
                   href={item.href}
                   className="duration-200 hover:scale-102 active:opacity-75"
                 >
-                  <img
+                  <Image
                     src={item.imageSrc}
                     alt={item.imageAlt}
                     className="w-full  h-100 object-cover rounded-lg  "

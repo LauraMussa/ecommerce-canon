@@ -64,7 +64,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         saveLocalStorage("cart", products);
       }
     }
-  }, [products]);
+  }, [products, user]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {

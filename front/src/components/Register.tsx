@@ -16,21 +16,21 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/UserContext";
 import { registerUser } from "@/services/user.service";
 import Loader from "./Loader/Loader";
+import Image from "next/image";
 
 const Register = () => {
-
   const [show, setShow] = useState(false);
   const [showR, setShowR] = useState(false);
   const router = useRouter();
-  const { setUser, user } = useAuth();
+  const { user } = useAuth();
 
   const formik = useFormik({
     initialValues: registerInitialValues,
     validationSchema: registerValidation,
     onSubmit: async () => {
       try {
-         await registerUser(formik.values);
-     
+        await registerUser(formik.values);
+
         router.push("/login");
       } catch (err) {
         console.log(err);
@@ -45,13 +45,16 @@ const Register = () => {
     if (user) {
       router.replace("/");
     }
-  }, [user]);
+  }, [user, router]);
   return (
     <>
       {!user ? (
         <>
           <Link href="/">
-            <img
+            <Image
+
+                width={100}
+                height={100}
               alt=""
               src="/images/LogoLight.svg"
               className="ml-[3rem] pt-5.5 h-10.5"

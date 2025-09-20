@@ -17,7 +17,7 @@ const ProductDetailCard = ({ id }: { id: string }) => {
   }, [id]);
 
   let oldPrice = 0;
-  product?.price && (oldPrice = product?.price + 500);
+  if (product?.price) oldPrice = product?.price + 500;
 
   return (
     <>
