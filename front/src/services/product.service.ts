@@ -1,6 +1,8 @@
 import { ProductProps } from "@/types/products/ProductProps";
-
+console.log("Variable de entorno NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+console.log("Construyendo URL para fetch:", `${apiUrl}/products`);
+
 
 export const getAllProducts = async () => {
   console.log("Llamando a:", `${apiUrl}/products`);
