@@ -17,7 +17,6 @@ export default function Store() {
         setError(null);
       } catch (error) {
         console.log(error);
-
         setError("Error loading products");
       }
     };
