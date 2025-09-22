@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 
 import { createOrdes } from "@/services/orders.service";
 import Image from "next/image";
+import { toastSuccess } from "@/helpers/toast";
 const Checkout = () => {
   const { user } = useAuth();
   const { getIdProducts, products, getTotal, clearCart } = useCart();
@@ -46,7 +47,7 @@ const Checkout = () => {
         await createOrdes(user.token, getIdProducts());
       }
       clearCart();
-      alert("Purchase completed successfully!");
+      toastSuccess("Purchase completed successfully!");
       router.replace("/dashboard");
     } catch (error) {
       throw new Error(error as string);
@@ -176,7 +177,7 @@ const Checkout = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            alert("Address added!");
+                            toastSuccess("Address added")
                             handleClose();
                           }}
                           className="cursor-pointer w-2xl mx-auto flex items-center justify-center  rounded-lg border 0 bg-white px-5 py-2 text-sm font-medium  hover:text-primary-700 focus:outline-none focus:ring-4  border-gray-600 dark:bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-blue-50 "

@@ -1,5 +1,7 @@
+import { toastError, toastSuccess } from "@/helpers/toast";
 import { LoginType } from "@/validators/loginSchema";
 import { RegisterType } from "@/validators/registerSchema";
+
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const loginUser = async (values: LoginType) => {
@@ -14,10 +16,10 @@ export const loginUser = async (values: LoginType) => {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message);
-      throw new Error(data.message || "Error al registrar usuario");
+      toastError(data.message);
+      throw new Error(data.message);
     }
-    alert("Logged in!");
+    toastSuccess("Logged In!");
 
     return data;
   } catch (error) {
@@ -38,10 +40,10 @@ export const registerUser = async (values: RegisterType) => {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message);
-      throw new Error(data.message || "Error al registrar usuario");
+      toastError(data.message);
+      throw new Error(data.message || "Error signin in");
     }
-    alert("Success!");
+    toastSuccess("Account created!");
     return data;
   } catch (error) {
     console.log(error);

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ChatBubble from "@/components/ChatBubble";
 import { UserProvider } from "@/context/UserContext";
 import { CartProvider } from "@/context/CartContext";
+import { Toaster } from "sonner";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -28,12 +29,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    //1a2746
     <html lang="en">
-      <body className={`${roboto.variable}${montserrat.variable} antialiased`}>
+      <body className={`${roboto.variable}${montserrat.variable}  antialiased`}>
         <UserProvider>
           <CartProvider>
             <>
+              <Toaster
+                position="top-center"
+                expand
+                richColors
+                closeButton
+                offset={16}
+                toastOptions={{
+                  style: {
+                    justifyContent: "center",
+                    gap: 2,
+                    background: "#cfd6e8",
+                  },
+                }}
+              />
               <Navbar />
+
               {children}
               <ChatBubble />
               <Footer />

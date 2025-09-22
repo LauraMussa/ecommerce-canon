@@ -45,8 +45,3 @@ html {
             hover:bg-transparent text-gray-50 transition active:scale-95;
   }
 }
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(200deg);
-  cursor: pointer;
-}

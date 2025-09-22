@@ -16,6 +16,7 @@ import {
   saveLocalStorage,
 } from "@/hooks/localStorage";
 import { Order } from "@/types/user/UserProps";
+import { toastConfirm, toastError, toastSuccess } from "@/helpers/toast";
 
 interface CartProps {
   products: ProductProps[];
@@ -80,13 +81,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       const productExist = products.some((item) => item.id === product.id);
 
       if (productExist) {
-        alert("You already have this product on your cart");
+        toastError("Already in your cart");
         return;
       }
       setProducts((prev) => [...prev, product]);
-      alert("Added to cart");
+      toastSuccess("Added!");
     } else {
-      alert("You must have an account");
+      toastError("You must have an account");
       return;
     }
   };
@@ -99,11 +100,16 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const clearCart = () => {
     if (products.length > 0) {
-      alert("Are you sure?");
-      setProducts([]);
-      removeLocalStorage("cart");
+      toastConfirm(
+        "Clear cart",
+        () => {
+          setProducts([]);
+          removeLocalStorage("cart");
+        },
+        () => {}
+      );
     } else {
-      alert("No products yet");
+      toastError("No products yet");
     }
   };
   const getTotal = () => {
