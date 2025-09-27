@@ -11,19 +11,27 @@ import { toastSuccess } from "@/helpers/toast";
 import AddressSelector from "./AddressSelector";
 import PaymentMethods from "./PaymentMethods";
 import DeliveryMethods from "./DeliveryMethods";
+
 const Checkout = () => {
   const { user } = useAuth();
   const { getIdProducts, products, getTotal, clearCart } = useCart();
   const router = useRouter();
   const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    country: "",
+    city: "",
+    street: "",
+  });
+  const [selectedAddress, setSelectedAddress] = useState<string>(
+    user ? user.user.address : ""
+  );
   const [selectedPayment, setSelectedPayment] = useState<string>("credit-card");
-
-  useEffect(() => {
-    if (!user) {
-      router.replace("/");
-    }
-  }, [user, router]);
-  if (!user) return <Loader />;
+  const [additionalAddresses, setAdditionalAddresses] = useState<
+    { street: string; city: string; country: string }[]
+  >([]);
+  const [selectedDelivery, setSelectedDelivery] = useState<string>("fedex");
 
   const handleOpen = () => {
     if (typeof window !== "undefined") {
@@ -35,20 +43,6 @@ const Checkout = () => {
       setShow(false);
     }
   };
-  const [additionalAddresses, setAdditionalAddresses] = useState<
-    { street: string; city: string; country: string }[]
-  >([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    country: "",
-    city: "",
-    street: "",
-  });
-  const [selectedAddress, setSelectedAddress] = useState<string>(
-    user.user.address
-  );
-  const [selectedDelivery, setSelectedDelivery] = useState<string>("fedex");
 
   const handleAddAddress = () => {
     setAdditionalAddresses((prev) => [
@@ -88,13 +82,18 @@ const Checkout = () => {
     }
   };
 
+  useEffect(() => {
+    if (!user) {
+      router.replace("/");
+    }
+  }, [user, router]);
+  if (!user) return <Loader />;
+
   return (
     <>
       {user ? (
         <section className="text-blue-50 py-8 antialiased dark:bg-gray-900 mx-5 p-4 rounded-2xl mt-10 md:py-16">
-          <form
-            className="mx-auto min-h-screen max-w-screen-2xl flex justify-center  items-center 2xl:px-0"
-          >
+          <form className="mx-auto min-h-screen max-w-screen-2xl flex justify-center  items-center 2xl:px-0">
             <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-15 xl:gap-40">
               <div className="min-w-0 flex-1 space-y-8">
                 <div className="space-y-4">
