@@ -20,7 +20,6 @@ export default function RootLayout({
             <Toaster
               position="top-center"
               expand
-              
               richColors
               closeButton
               offset={16}

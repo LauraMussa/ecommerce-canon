@@ -93,23 +93,17 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const removeFromCart = (productId: number) => {
-    const itemList = (prev: ProductProps[]) =>
-      prev.filter((p) => p.id !== productId);
-    setProducts(itemList);
+    toastConfirm("Remove from cart", () => {
+      const itemList = (prev: ProductProps[]) =>
+        prev.filter((p) => p.id !== productId);
+      setProducts(itemList);
+    });
   };
 
   const clearCart = () => {
     if (products.length > 0) {
-      toastConfirm(
-        "Clear cart",
-        () => {
-          setProducts([]);
-          removeLocalStorage("cart");
-        },
-        () => {}
-      );
-    } else {
-      toastError("No products yet");
+      setProducts([]);
+      removeLocalStorage("cart");
     }
   };
   const getTotal = () => {

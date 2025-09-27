@@ -12,7 +12,6 @@ export default function UserDashboard() {
   const { user } = useAuth();
   const { orders, setOrders, setError, error } = useCart();
   const router = useRouter();
-
   useEffect(() => {
     if (!user) {
       router.replace("/login");
@@ -59,7 +58,7 @@ export default function UserDashboard() {
   return (
     <>
       {user ? (
-        <div className="min-h-screen bg-slate-900 text-blue-50 flex flex-col mx-20 rounded-2xl mt-10">
+        <div className="min-h-screen bg-slate-900 text-blue-50 flex flex-col mx-5 md:mx-20 rounded-2xl mt-10">
           <section className="flex flex-col items-center text-center p-6">
             <Image
               width={100}
@@ -108,13 +107,16 @@ export default function UserDashboard() {
                     <>
                       <div
                         key={order.id}
-                        className="bg-slate-800 py-4 relative  px-6 rounded-lg flex justify-between items-center shadow border border-slate-700 hover:border-orange-400 transition "
+                        className="bg-slate-800 py-4 text-sm relative gap-3 px-3 md:px-6 rounded-lg flex justify-between items-center shadow border border-slate-700  hover:border-orange-300 transition "
                       >
                         <div>
                           <p className="text-slate-400 text-sm">
                             Order #{order.id}
                           </p>
-                          <p>Date: {order.date.slice(0, 10)}</p>
+                          <p className="flex gap-1">
+                            <span className="hidden md:block">Date:</span>{" "}
+                            {order.date.slice(0, 10)}
+                          </p>
                           <p className="flex gap-1 items-center">
                             Status:
                             <span className={"text-green-500 text-sm"}>
@@ -126,10 +128,10 @@ export default function UserDashboard() {
                           </p>
                         </div>
                         <button
-                          className="cursor-pointer hover:scale-105 transition duration-100 bg-slate-900/70 h-[fit-content] px-3 py-2 rounded-2xl "
+                          className="cursor-pointer hover:scale-105 transition duration-100 bg-slate-900/70 h-[fit-content] text-sm md:text-base px-3 py-2 rounded-2xl "
                           onClick={() => handleOpen(order.id)}
                         >
-                          Watch products
+                          Items
                         </button>
                         <div
                           className={`absolute right-0 top-1/2 -translate-y-1/2 

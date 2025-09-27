@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* --background:#2B3E50; */
   --background: #011532e7;
   --background-light: #e6e6e6;
   --font-dark: #01142f;
@@ -20,8 +19,6 @@
   --color-background: var(--background);
   --color-background-light: var(--background-light);
   --font-sans: var(--font-monserrat);
-  /* --font-mono: var(--roboto-condensed); */
-  /* --font-mono: var(--font-roboto); */
   --color-font-dark: var(--font-dark);
   --color-accent-yellow: var(--accent-yellow);
 }
@@ -32,6 +29,12 @@ html {
   background-color: var(--color-background);
   overflow-y: scroll !important;
   padding-right: 0px !important;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* parche para cortar desbordes horizontales */
 }
 @layer {
   .input {

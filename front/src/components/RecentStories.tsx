@@ -85,7 +85,7 @@ const RecentStories = () => {
                 <div className="relative w-full h-[500px]">
                   <Image
 
-                width={100}
+                width={1000}
                 height={100}
                     src={item.imageSrc}
                     alt={item.imageAlt}

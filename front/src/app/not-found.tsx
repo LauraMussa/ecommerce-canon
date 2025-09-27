@@ -7,7 +7,6 @@ const notFound = () => {
       <NotFound />
     </div>
   );
-  //aca poner el efecto de hero
 };
 
 export default notFound;

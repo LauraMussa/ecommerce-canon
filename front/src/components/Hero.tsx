@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="mx-auto rounded-2xl w-full h-[90vh] flex items-center justify-end text-blue-50 lg:pr-35 ">
+    <section className="mx-auto rounded-2xl w-full h-[90vh] flex items-center justify-end text-blue-50 xl:pr-20 ">
       <div className="absolute inset-0 -z-10 ">
         <Image
           src="/images/image60.png"

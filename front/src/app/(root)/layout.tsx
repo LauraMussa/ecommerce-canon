@@ -29,9 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    //1a2746
     <html lang="en">
-      <body className={`${roboto.variable}${montserrat.variable}  antialiased`}>
+      <body className={`${roboto.variable} ${montserrat.variable}  antialiased`}>
         <UserProvider>
           <CartProvider>
             <>

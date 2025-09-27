@@ -38,8 +38,8 @@ export default function Store() {
             </button>
           </div>
         ) : (
-          <div className="mx-auto  px-4 py-16 sm:px-6 sm:py-24 lg:px-8 ">
-            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 ">
+          <div className="mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8 ">
+            <div className="grid grid-cols-1 gap-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
               <>
                 {productList?.map((p, index) => {
                   return (

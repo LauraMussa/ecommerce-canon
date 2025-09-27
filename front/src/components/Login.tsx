@@ -32,8 +32,6 @@ const Login = () => {
       try {
         const response = await loginUser(formik.values);
         setUser(response);
-        console.log("token", response.token);
-
         router.push("/");
       } catch (err) {
         console.log(err);
@@ -56,9 +54,8 @@ const Login = () => {
         <>
           <Link href="/">
             <Image
-
-                width={100}
-                height={100}
+              width={100}
+              height={100}
               alt=""
               src="/images/LogoLight.svg"
               className="ml-[3rem] pt-5.5 h-10.5"
@@ -66,12 +63,13 @@ const Login = () => {
           </Link>
 
           <div className="flex flex-col  h-screen">
-            <h2 className="text-2xl text-blue-50 text-center mb-4">Sign in</h2>
-
             <form
               onSubmit={formik.handleSubmit}
               className="flex flex-col  text-blue-50  h-fit p-5 mt-15 md:mt-30 rounded-2xl"
             >
+              <h2 className="text-2xl text-blue-50 text-center mb-4">
+                Sign in
+              </h2>
               <div className="py-2 text-left flex w-full max-w-md mx-auto flex-col">
                 <label htmlFor="email" className="text-gray-400">
                   Email adress

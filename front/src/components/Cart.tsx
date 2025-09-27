@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Loader from "./Loader/Loader";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
+import { toastConfirm, toastError } from "@/helpers/toast";
 const Cart = () => {
   const router = useRouter();
   const { user } = useAuth();
@@ -19,10 +20,23 @@ const Cart = () => {
     if (!user) router.replace("/login");
   }, [user, router]);
 
+  const handleClear = () => {
+    if (products.length > 0) {
+      toastConfirm(
+        "Clear cart",
+        () => {
+          clearCart();
+        },
+        () => {}
+      );
+    } else {
+      toastError("No products yet");
+    }
+  };
   return (
     <>
       {user ? (
-        <div className="max-w-3xl mx-auto p-6 bg-gray-900/70 rounded-2xl my-15 text-gray-100">
+        <div className="max-w-3xl mx-4 md:mx-auto p-6 bg-gray-900/70 rounded-2xl my-15 text-gray-100">
           <h2 className="text-2xl font-bold mb-6 text-center text-blue-50">
             Shopping Cart
           </h2>
@@ -87,7 +101,7 @@ const Cart = () => {
           </p>
           <div className="flex gap-4">
             <button
-              onClick={clearCart}
+              onClick={handleClear}
               className="w-full border-red-500/50 hover:scale-102 transition-all duration-200 border-1 cursor-pointer text-blue-50 py-3 rounded-lg mt-6 font-medium shadow-lg hover:shadow-red-900/30"
             >
               Clear Cart
@@ -112,7 +126,7 @@ const Cart = () => {
             </Link>
           </div>
           <div className="  justify-center gap-3 items-center my-7 flex-col flex md:flex-row ">
-            <label htmlFor="descount">
+            <label htmlFor="descount" className="text-sm md:text-base">
               Do you have a voucher or gift card?
             </label>
             <div className="flex items-center">
@@ -121,7 +135,7 @@ const Cart = () => {
                 name="descount"
                 className="bg-slate-500/30 h-9 text-font-dark indent-2 focus:outline-none rounded-s-lg"
               />
-              <button className="border-blue-600/50 border-1 px-4 h-9 rounded-e-lg hover:bg-blue-500/50 cursor-pointer">
+              <button className="border-blue-600/50 border-1 px-4 h-9 text-xs md:text-base rounded-e-lg hover:bg-blue-500/50 cursor-pointer">
                 Apply Code
               </button>
             </div>

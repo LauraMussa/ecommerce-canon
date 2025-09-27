@@ -1,15 +1,3 @@
-// What’s New at Canon
-// Canon Club Collage Challenge: Capture, Print & Win
-// Share your story through a photo, print it, and showcase it on the Canon Club wall for a chance to win the SELPHY CP1500.
-
-// Sustainability at Our Core
-// Responsibility and sustainability are in our DNA. Discover how Canon is driving change through innovative sustainability initiatives.
-
-// Exclusive Offers
-// Don’t miss out—explore our latest deals and past promotions all in one place.
-
-// Professional Imaging
-// Stay inspired with the latest news, stories, gear, and expert tips from world-renowned photographers and filmmakers.
 
 import Image from "next/image";
 
@@ -19,30 +7,30 @@ export default function WhatsNew() {
       title: "Canon Club Collage Challenge",
       description:
         "Share your story through a photo, print it, and showcase it on the Canon Club wall for a chance to win the SELPHY CP1500",
-      image: "/Collage.png",
+      image: "/images/Collage.png",
     },
     {
       title: "Sustainability at Our Core",
       description:
         "Responsibility and sustainability are in our DNA. Discover how Canon is driving change through innovative sustainability initiatives.",
-      image: "/Sustainability2.png",
+      image: "/images/Sustainability2.png",
     },
     {
       title: "Exclusive Offers",
       description:
         "Don't miss out, explore our latest deals and past promotions all in one place.",
-      image: "/Offers.png",
+      image: "/images/Offers.png",
     },
     {
       title: "Professional Imaging",
       description:
         "Stay inspired with the latest news, stories, gear, and expert tips from world-renowned photographers and filmmakers.",
-      image: "/Imaging.png",
+      image: "/images/Imaging.png",
     },
   ];
 
   return (
-    <section className="text-blue-50 mt-45  bg-gray-900/70 py-16">
+    <section className="text-blue-50 md:mt-35 mt-20  bg-gray-900/70 py-16">
       <div className="max-w-8xl mx-auto px-6 ">
         <h2 className="text-3xl mx-4 mb-5 ">What&#39;s New at Canon</h2>
         <div className="grid gap-8 md:grid-cols-2 ">
@@ -59,7 +47,7 @@ export default function WhatsNew() {
                   ></Image>
                 </div>
 
-                <div className="text-left flex flex-col justify-end  h-32">
+                <div className="text-left flex flex-col justify-end  ">
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                   <p className="hidden lg:flex text-gray-300">
                     {item.description}
