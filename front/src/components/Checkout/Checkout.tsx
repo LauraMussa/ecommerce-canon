@@ -11,12 +11,15 @@ import { toastSuccess } from "@/helpers/toast";
 import AddressSelector from "./AddressSelector";
 import PaymentMethods from "./PaymentMethods";
 import DeliveryMethods from "./DeliveryMethods";
-
 const Checkout = () => {
   const { user } = useAuth();
-  const { getIdProducts, products, getTotal, clearCart } = useCart();
+  const { getIdProducts, products, getTotal, clearCart, discount } = useCart();
   const router = useRouter();
   const [show, setShow] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState<string>("credit-card");
+  const [additionalAddresses, setAdditionalAddresses] = useState<
+    { street: string; city: string; country: string }[]
+  >([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,14 +27,18 @@ const Checkout = () => {
     city: "",
     street: "",
   });
+
   const [selectedAddress, setSelectedAddress] = useState<string>(
     user ? user.user.address : ""
   );
-  const [selectedPayment, setSelectedPayment] = useState<string>("credit-card");
-  const [additionalAddresses, setAdditionalAddresses] = useState<
-    { street: string; city: string; country: string }[]
-  >([]);
   const [selectedDelivery, setSelectedDelivery] = useState<string>("fedex");
+  
+  useEffect(() => {
+    if (!user) {
+      router.replace("/");
+    }
+  }, [user, router]);
+  if (!user) return <Loader />;
 
   const handleOpen = () => {
     if (typeof window !== "undefined") {
@@ -62,8 +69,7 @@ const Checkout = () => {
   const finalPrice = () => {
     const total = getTotal();
     const tax = total * 0.08;
-    const savings = 0;
-    return total + tax + savings;
+    return total + tax - discount;
   };
 
   const handleCheckout = async () => {
@@ -81,13 +87,6 @@ const Checkout = () => {
       throw new Error(error as string);
     }
   };
-
-  useEffect(() => {
-    if (!user) {
-      router.replace("/");
-    }
-  }, [user, router]);
-  if (!user) return <Loader />;
 
   return (
     <>
@@ -168,16 +167,7 @@ const Checkout = () => {
                         Savings
                       </dt>
                       <dd className="text-base font-medium text-green-500">
-                        0
-                      </dd>
-                    </dl>
-
-                    <dl className="flex items-center justify-between gap-4 py-3">
-                      <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                        Store Pickup
-                      </dt>
-                      <dd className="text-base font-medium text-gray-900 dark:text-blue-50">
-                        $ {getTotal()}
+                        $ {discount}
                       </dd>
                     </dl>
 
@@ -186,7 +176,7 @@ const Checkout = () => {
                         Tax
                       </dt>
                       <dd className="text-base font-medium text-gray-900 dark:text-blue-50">
-                        $199
+                        $ {getTotal() * 0.08}
                       </dd>
                     </dl>
 
@@ -195,7 +185,7 @@ const Checkout = () => {
                         Total
                       </dt>
                       <dd className="text-base font-bold text-gray-900 dark:text-blue-50">
-                        ${finalPrice()}
+                        $ {finalPrice()}
                       </dd>
                     </dl>
                   </div>

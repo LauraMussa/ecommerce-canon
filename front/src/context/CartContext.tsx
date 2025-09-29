@@ -20,8 +20,6 @@ import { toastConfirm, toastError, toastSuccess } from "@/helpers/toast";
 
 interface CartProps {
   products: ProductProps[];
-  setProducts: Dispatch<SetStateAction<ProductProps[]>>;
-  // setProducts: (product: ProductProps | null) => void;
   addToCart: (product: ProductProps) => void;
   removeFromCart: (productId: number) => void;
   getIdProducts: () => number[];
@@ -32,11 +30,12 @@ interface CartProps {
   setOrders: Dispatch<SetStateAction<Order[]>>;
   error: string | null;
   setError: Dispatch<SetStateAction<string | null>>;
+  setDiscount: Dispatch<SetStateAction<number>>;
+  discount: number;
 }
 
 const CartContext = createContext<CartProps>({
   products: [],
-  setProducts: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
   getIdProducts: () => [],
@@ -47,6 +46,8 @@ const CartContext = createContext<CartProps>({
   setOrders: () => {},
   error: null,
   setError: () => {},
+  setDiscount: () => 0,
+  discount: 0,
 });
 
 interface CartProviderProps {
@@ -58,6 +59,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
+  const [discount, setDiscount] = useState<number>(0);
 
   useEffect(() => {
     if (user) {
@@ -126,11 +128,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     getProductCount,
     clearCart,
     getIdProducts,
-    setProducts,
     orders,
     setOrders,
     error,
     setError,
+    setDiscount,
+    discount,
   };
 
   return <CartContext.Provider value={values}>{children}</CartContext.Provider>;

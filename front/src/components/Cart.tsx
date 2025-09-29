@@ -3,18 +3,26 @@
 import { useAuth } from "@/context/UserContext";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { GoTrash } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import Loader from "./Loader/Loader";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
-import { toastConfirm, toastError } from "@/helpers/toast";
+import { toastConfirm, toastError, toastSuccess } from "@/helpers/toast";
 const Cart = () => {
   const router = useRouter();
   const { user } = useAuth();
-  const { removeFromCart, getTotal, getProductCount, products, clearCart } =
-    useCart();
+  const [disabledBtn, setDisabledBtn] = useState(false);
+  const [validCupon, setValidCupon] = useState(false);
+  const {
+    removeFromCart,
+    setDiscount,
+    getTotal,
+    getProductCount,
+    products,
+    clearCart,
+  } = useCart();
 
   useEffect(() => {
     if (!user) router.replace("/login");
@@ -33,11 +41,35 @@ const Cart = () => {
       toastError("No products yet");
     }
   };
+
+  const handleDiscountChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setDisabledBtn(false);
+    if (e.target.value === "descuento10") {
+      setValidCupon(true);
+
+      setDiscount(getTotal() * 0.1);
+    } else if (e.target.value === "descuento20") {
+      setValidCupon(true);
+      setDiscount(getTotal() * 0.2);
+    } else {
+      setValidCupon(false);
+    }
+  };
+  const handleDiscoutn = () => {
+    if (validCupon) {
+      setDisabledBtn(true);
+      toastSuccess("Discount applied!");
+    } else {
+      toastError("Discount cuppon invalid");
+      setDisabledBtn(false);
+    }
+  };
+
   return (
     <>
       {user ? (
         <div className="max-w-3xl mx-4 md:mx-auto p-6 bg-gray-900/70 rounded-2xl my-15 text-gray-100">
-          <h2 className="text-2xl font-bold mb-6 text-center text-blue-50">
+          <h2 className="text-2xl font-bold md:mb-6 text-center text-blue-50">
             Shopping Cart
           </h2>
           <ul className="divide-y divide-gray-700">
@@ -65,7 +97,7 @@ const Cart = () => {
                       <div>
                         <h3 className="font-medium text-blue-50">{p.name}</h3>
                       </div>
-                      <p className="text-blue-50 font-semibold">
+                      <p className="text-blue-50 text-sm md:text-base font-semibold">
                         ${p.price.toFixed(2)}
                       </p>
                     </div>
@@ -102,13 +134,13 @@ const Cart = () => {
           <div className="flex gap-4">
             <button
               onClick={handleClear}
-              className="w-full border-red-500/50 hover:scale-102 transition-all duration-200 border-1 cursor-pointer text-blue-50 py-3 rounded-lg mt-6 font-medium shadow-lg hover:shadow-red-900/30"
+              className="w-full border-red-500/50 hover:scale-102 hover:border-red-500 transition-all duration-200 border-1 cursor-pointer text-blue-50 py-3 rounded-lg mt-6 font-medium shadow-lg "
             >
               Clear Cart
             </button>
             <Link
               href={products.length > 0 ? "/checkout" : "/shop"}
-              className="w-full border-blue-500/50 text-center hover:scale-102 transition-all duration-200 border-1 cursor-pointer text-blue-50 py-3 rounded-lg mt-6 font-medium shadow-lg hover:shadow-blue-900/30"
+              className="w-full border-blue-500/50 text-center hover:scale-102 hover:border-blue-500 transition-all duration-200 border-1 cursor-pointer text-blue-50 py-3 rounded-lg mt-6 font-medium shadow-lg "
             >
               Checkout
             </Link>
@@ -131,11 +163,16 @@ const Cart = () => {
             </label>
             <div className="flex items-center">
               <input
+                onChange={(e) => handleDiscountChange(e)}
                 type="text"
                 name="descount"
-                className="bg-slate-500/30 h-9 text-font-dark indent-2 focus:outline-none rounded-s-lg"
+                className="bg-slate-500/30 h-9 text-blue-50 indent-2 focus:outline-none rounded-s-lg "
               />
-              <button className="border-blue-600/50 border-1 px-4 h-9 text-xs md:text-base rounded-e-lg hover:bg-blue-500/50 cursor-pointer">
+              <button
+                disabled={disabledBtn ? true : false}
+                onClick={handleDiscoutn}
+                className="border-blue-600/50 border-1 px-4 h-9 text-xs md:text-base rounded-e-lg hover:bg-blue-400/50 disabled:cursor-not-allowed disabled:hover:bg-transparent cursor-pointer"
+              >
                 Apply Code
               </button>
             </div>

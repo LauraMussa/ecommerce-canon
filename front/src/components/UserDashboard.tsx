@@ -124,7 +124,7 @@ export default function UserDashboard() {
                             </span>
                           </p>
                           <p className="font-semibold mt-2">
-                            Total: ${totalOrder(order.id)}
+                            Total: $ {totalOrder(order.id)}
                           </p>
                         </div>
                         <button

@@ -32,18 +32,18 @@ export default function WhatsNew() {
   return (
     <section className="text-blue-50 md:mt-35 mt-20  bg-gray-900/70 py-16">
       <div className="max-w-8xl mx-auto px-6 ">
-        <h2 className="text-3xl mx-4 mb-5 ">What&#39;s New at Canon</h2>
+        <h2 className="text-xl text-center md:text-left md:text-3xl mx-4 mb-7 ">What&#39;s New at Canon</h2>
         <div className="grid gap-8 md:grid-cols-2 ">
           {features.map((item, idx) => {
             return (
-              <div key={idx} className="flex items-center p-6 ">
-                <div className="relative w-38 h-38 mr-4 flex-shrink-0 transition duration-200 hover:scale-105 cursor-pointer">
+              <div key={idx} className="flex items-center p-3 md:p-6 ">
+                <div className="relative  mr-4 flex-shrink-0 transition duration-200 md:w-38 md:h-38 items-center justify-center hover:scale-105 cursor-pointer">
                   <Image
                     width={300}
                     height={100}
                     src={item.image}
                     alt={item.title}
-                    className="object-cover"
+                    className="object-cover w-20 md:w-33 rounded-sm  "
                   ></Image>
                 </div>
 

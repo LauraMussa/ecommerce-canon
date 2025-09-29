@@ -6,10 +6,12 @@ import { ProductProps } from "@/types/products/ProductProps";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Loader from "@/components/Loader/Loader";
 
 const ProductDetail = () => {
   const params = useParams();
   const [productList, setProductList] = useState<ProductProps[]>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -18,11 +20,14 @@ const ProductDetail = () => {
       } catch (error) {
         console.log(error);
         throw new Error(error as string);
+      } finally {
+        setLoading(false);
       }
     };
     fetchProducts();
   }, []);
-  
+
+  if (loading) return <Loader />;
   return (
     <>
       {Number(params.productId) > productList.length ? (

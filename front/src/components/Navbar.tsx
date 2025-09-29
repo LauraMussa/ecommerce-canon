@@ -16,7 +16,7 @@ import { useAuth } from "@/context/UserContext";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
+  { name: "About Us", href: "/about-us" },
 ];
 
 const navigationUser = [
@@ -34,7 +34,6 @@ export default function Navbar() {
       as="nav"
       className="relative mt-2 bg-transparent flex justify-between items-center w-full"
     >
-      {/* Logo */}
       <div className="ml-6">
         <Link href={"/"}>
           <Image
@@ -46,7 +45,6 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Menu desktop */}
       <div className="hidden sm:flex items-center gap-6 mr-10 mt-5">
         {user ? (
           <>
@@ -67,7 +65,6 @@ export default function Navbar() {
               );
             })}
 
-            {/* Avatar + dropdown */}
             <Menu as="div" className="relative">
               <MenuButton className="rounded-full focus:outline-none">
                 <Image
@@ -78,7 +75,7 @@ export default function Navbar() {
                   className="rounded-full object-cover h-11 w-11"
                 />
               </MenuButton>
-              <MenuItems className="absolute right-0 z-10 mt-2 w-48 rounded-md bg-[#21314ade] py-1 shadow-lg">
+              <MenuItems className="absolute right-0 z-10 mt-2 w-48 rounded-md bg-[#21314a] text-center py-1 shadow-lg">
                 {navigationUser.map((item, i) => (
                   <MenuItem key={i}>
                     <Link
@@ -92,7 +89,7 @@ export default function Navbar() {
                 <MenuItem>
                   <button
                     onClick={logout}
-                    className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/5"
+                    className="w-full  px-4 py-2 text-sm text-gray-300 hover:bg-white/5 text-center"
                   >
                     Log Out
                   </button>
@@ -103,11 +100,26 @@ export default function Navbar() {
         ) : (
           <>
             <Link
+              href="/about-us"
+              className={`${
+                pathname === "/about-us"
+                  ? "text-accent-yellow font-medium hover:underline"
+                  : "text-blue-50 hover:underline"
+              }`}
+            >
+              About Us
+            </Link>
+            <Link
               href="/shop"
-              className="font-medium text-blue-50 hover:underline"
+              className={`${
+                pathname === "/shop"
+                  ? "text-accent-yellow font-medium hover:underline"
+                  : "text-blue-50 hover:underline"
+              }`}
             >
               Store
             </Link>
+
             <Link
               href="/login"
               className="font-medium text-blue-50 hover:underline"
@@ -118,7 +130,6 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Botón hamburguesa mobile */}
       <div className="sm:hidden mr-4">
         <DisclosureButton className="inline-flex items-center justify-center p-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-md">
           <Bars3Icon className="block h-6 w-6 group-data-open:hidden" />
@@ -126,7 +137,6 @@ export default function Navbar() {
         </DisclosureButton>
       </div>
 
-      {/* Panel desplegable mobile */}
       <DisclosurePanel className="sm:hidden absolute top-full left-0 w-full bg-gray-900/95 z-50 shadow-lg">
         <div className="px-4 py-3 space-y-2">
           {user ? (
