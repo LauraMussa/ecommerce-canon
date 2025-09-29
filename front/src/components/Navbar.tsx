@@ -156,6 +156,13 @@ export default function Navbar() {
                 </DisclosureButton>
               ))}
               <DisclosureButton
+                as={Link}
+                href={"about-us"}
+                className="block w-full text-left rounded-md px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-blue-50"
+              >
+                About Us
+              </DisclosureButton>
+              <DisclosureButton
                 as="button"
                 onClick={logout}
                 className="block w-full text-left rounded-md px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-blue-50"
