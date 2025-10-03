@@ -1,30 +1,8 @@
 
 'use client'
-import { CameraIcon, FingerPrintIcon, SpeakerWaveIcon, HandRaisedIcon } from "@heroicons/react/24/outline";
+import { advantages } from "@/helpers/callouts";
 import { useState } from "react";
 export default function EosRAdvantages() {
-  const advantages = [
-    {
-      title: "Intelligent Autofocus",
-      description: "Dual Pixel AF recognizes various types of subjects quickly and accurately.",
-      icon: FingerPrintIcon,
-    },
-    {
-      title: "Compact, Lightweight, and Practical Body",
-      icon: CameraIcon,
-    },
-    {
-      title: "Silent Shooting",
-      description: "Capture photos without disturbing your subject.",
-      icon: SpeakerWaveIcon,
-    },
-    {
-      title: "Intuitive and Ergonomic Design",
-      description: "Controls are within easy reach, familiar to anyone who has used an interchangeable-lens camera, and intuitive for newcomers.",
-      icon: HandRaisedIcon,
-    },
-  ];
-
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

@@ -5,7 +5,7 @@ export const saveLocalStorage = <T>(key: string, data: T) => {
 export const getLocalStorage = (key: string) => {
   const item = localStorage.getItem(key);
   if (!item) return null;
-  return item;
+  return JSON.parse(item);
 };
 
 export const removeLocalStorage = (key: string) => {

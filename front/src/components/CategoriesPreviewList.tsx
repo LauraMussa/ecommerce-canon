@@ -1,5 +1,5 @@
 import React from "react";
-import { callouts } from "@/helpers/callouts";
+import { categories } from "@/helpers/callouts";
 import Link from "next/link";
 
 import Image from "next/image";
@@ -12,7 +12,7 @@ const CategoriesPreviewList = () => {
             Shop by Category
           </h2>
           <div className=" grid grid-rows-4 gap-6">
-            {callouts.map((item, index) => {
+            {categories.map((item, index) => {
               return (
                 <Link
                   key={index}

@@ -9,6 +9,7 @@ const CategoryId = ({ params }: ParamProps) => {
     { name: "Camcorders" },
     { name: "Printers" },
     { name: "Accessories" },
+    { name: "Objectives" },
   ];
   const { id } = params;
 
@@ -25,6 +26,7 @@ const CategoryId = ({ params }: ParamProps) => {
     };
     fetchProducts();
   }, [id]);
+  
   return (
     <div className=" m-auto min-h-screen flex  justify-center">
       <div className=" py-16 sm:px-6 sm:py-24  lg:px-10 ">

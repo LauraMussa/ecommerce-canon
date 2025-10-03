@@ -9,7 +9,6 @@ export interface UserProps {
   avatar: string;
   orders: Order[];
   dateOfBirth: string;
-  paymentMethods: PaymentMethod[];
 }
 export interface UserI {
   address: string;
@@ -19,11 +18,7 @@ export interface UserI {
   phone: string;
   role: string;
 }
-export interface PaymentMethod {
-  name: string;
-  last4?: string;
-  type?: string;
-}
+
 export interface Order {
   id: number;
   total: number;

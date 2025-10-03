@@ -1,37 +1,16 @@
 "use client";
 
-interface PaymentMethodsProps {
-  selectedPayment: string;
-  setSelectedPayment: (value: string) => void;
-}
+import { paymentMethods } from "@/helpers/callouts";
+import { PaymentMethodsProps } from "@/types/products/ProductProps";
 
 const PaymentMethods: React.FC<PaymentMethodsProps> = ({
   selectedPayment,
   setSelectedPayment,
 }) => {
-  const methods = [
-    {
-      id: "credit-card",
-      label: "Credit Card",
-      description: "Pay with your credit card",
-    },
-    {
-      id: "paypal",
-      label: "Paypal account",
-      description: "Connect to your account",
-    },
-    {
-      id: "pay-on-delivery",
-      label: "Payment on delivery",
-      description: "+$15 payment processing fee",
-    },
-  ];
-
   return (
     <div className="space-y-4">
-     
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 ">
-        {methods.map((method) => (
+        {paymentMethods.map((method) => (
           <div
             key={method.id}
             className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 hover:border-orange-300 dark:bg-gray-800"

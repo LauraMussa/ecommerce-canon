@@ -1,40 +1,8 @@
 "use client";
+import { AddressSelectorProps } from "@/types/products/ProductProps";
 import React from "react";
 
-interface Address {
-  street: string;
-  city: string;
-  country: string;
-}
-
-interface Props {
-  userAddress: string;
-  additionalAddresses: Address[];
-  selectedAddress: string;
-  setSelectedAddress: (addr: string) => void;
-  formData: {
-    name: string;
-    email: string;
-    country: string;
-    city: string;
-    street: string;
-  };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      email: string;
-      country: string;
-      city: string;
-      street: string;
-    }>
-  >;
-  handleAddAddress: () => void;
-  show: boolean;
-  handleOpen: () => void;
-  handleClose: () => void;
-}
-
-const AddressSelector: React.FC<Props> = ({
+const AddressSelector: React.FC<AddressSelectorProps> = ({
   userAddress,
   additionalAddresses,
   selectedAddress,

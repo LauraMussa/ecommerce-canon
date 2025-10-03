@@ -14,7 +14,6 @@ const ProductCard = (product: ProductProps) => {
                  overflow-hidden flex flex-col transition-transform 
                  duration-200 hover:-translate-y-1 hover:shadow-2xl"
     >
-      {/* Imagen */}
       <div
         className="w-full h-52 flex items-center justify-center 
                    bg-gradient-to-b from-[#5f7088] to-gray-900/70 p-4"
@@ -28,12 +27,9 @@ const ProductCard = (product: ProductProps) => {
         />
       </div>
 
-      {/* Contenido */}
       <div className="flex flex-col justify-between text-center px-6 py-4 flex-grow">
-        {/* Parte superior: título + stock + precio */}
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-xl font-bold text-blue-50">{product.name}</h3>
-
           <div className="flex flex-col items-center justify-center gap-2">
             {product.stock > 0 ? (
               <p className="text-sm text-green-500">✔ In stock</p>
@@ -49,7 +45,6 @@ const ProductCard = (product: ProductProps) => {
           </div>
         </div>
 
-        {/* Parte inferior: botones pegados abajo */}
         <div className="flex gap-2 w-full items-center mt-4">
           <button
             className="w-full flex items-center justify-center gap-2 bg-blue-900 text-blue-50 

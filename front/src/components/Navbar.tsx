@@ -13,17 +13,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useAuth } from "@/context/UserContext";
+import { navigation, navigationUser } from "@/helpers/callouts";
 
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about-us" },
-];
 
-const navigationUser = [
-  { name: "My Cart", href: "/cart" },
-  { name: "Shop", href: "/shop" },
-  { name: "Dashboard", href: "/dashboard" },
-];
 
 export default function Navbar() {
   const { user, logout } = useAuth();

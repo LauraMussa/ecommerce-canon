@@ -1,40 +1,15 @@
 
+import { whatsNew } from "@/helpers/callouts";
 import Image from "next/image";
 
 export default function WhatsNew() {
-  const features = [
-    {
-      title: "Canon Club Collage Challenge",
-      description:
-        "Share your story through a photo, print it, and showcase it on the Canon Club wall for a chance to win the SELPHY CP1500",
-      image: "/images/Collage.png",
-    },
-    {
-      title: "Sustainability at Our Core",
-      description:
-        "Responsibility and sustainability are in our DNA. Discover how Canon is driving change through innovative sustainability initiatives.",
-      image: "/images/Sustainability2.png",
-    },
-    {
-      title: "Exclusive Offers",
-      description:
-        "Don't miss out, explore our latest deals and past promotions all in one place.",
-      image: "/images/Offers.png",
-    },
-    {
-      title: "Professional Imaging",
-      description:
-        "Stay inspired with the latest news, stories, gear, and expert tips from world-renowned photographers and filmmakers.",
-      image: "/images/Imaging.png",
-    },
-  ];
 
   return (
     <section className="text-blue-50 md:mt-35 mt-20  bg-gray-900/70 py-16">
       <div className="max-w-8xl mx-auto px-6 ">
         <h2 className="text-xl text-center md:text-left md:text-3xl mx-4 mb-7 ">What&#39;s New at Canon</h2>
         <div className="grid gap-8 md:grid-cols-2 ">
-          {features.map((item, idx) => {
+          {whatsNew.map((item, idx) => {
             return (
               <div key={idx} className="flex items-center p-3 md:p-6 ">
                 <div className="relative  mr-4 flex-shrink-0 transition duration-200 md:w-38 md:h-38 items-center justify-center hover:scale-105 cursor-pointer">

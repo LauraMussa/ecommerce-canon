@@ -36,7 +36,6 @@ interface UserContextType {
   logout: () => void;
 }
 
-//valores iniciales
 export const UserContext = createContext<UserContextType>({
   user: null,
   setUser: () => {},
@@ -56,7 +55,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     if (typeof window !== "undefined" && window.localStorage) {
       const dataUser = getLocalStorage("user");
       if (dataUser) {
-        setUser(JSON.parse(dataUser));
+        setUser(dataUser);
       }
     }
   }, []);

@@ -1,38 +1,16 @@
-// DeliveryMethods.tsx
 "use client";
+import { deliveryMethods } from "@/helpers/callouts";
+import { DeliveryMethodsProps } from "@/types/products/ProductProps";
 import React from "react";
-
-interface DeliveryMethodsProps {
-  selectedDelivery: string;
-  setSelectedDelivery: (value: string) => void;
-}
 
 const DeliveryMethods: React.FC<DeliveryMethodsProps> = ({
   selectedDelivery,
   setSelectedDelivery,
 }) => {
-  const methods = [
-    {
-      id: "fedex",
-      label: "Free Delivery - FedEx",
-      description: "Get it by Friday, 13 Dec 2025",
-    },
-    {
-      id: "dhl",
-      label: "$15 - DHL Fast Delivery",
-      description: "Get it by Tomorrow",
-    },
-    {
-      id: "express",
-      label: "$49 - Express Delivery",
-      description: "Get it today",
-    },
-  ];
-
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {methods.map((method) => (
+        {deliveryMethods.map((method) => (
           <div
             key={method.id}
             className="rounded-lg border border-gray-200 bg-gray-50 p-4 hover:border-orange-300 dark:border-gray-700 dark:bg-gray-800"

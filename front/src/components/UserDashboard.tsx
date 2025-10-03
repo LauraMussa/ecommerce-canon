@@ -32,9 +32,7 @@ export default function UserDashboard() {
       } catch (error) {
         if (error) setError(`Error loading orders`);
         console.log(error);
-      } finally {
-        // setLoading(false);
-      }
+      } 
     };
 
     fetchOrders();

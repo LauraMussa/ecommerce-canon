@@ -73,7 +73,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     if (typeof window !== "undefined" && window.localStorage) {
       const cartData = getLocalStorage("cart");
       if (cartData) {
-        setProducts(JSON.parse(cartData));
+        setProducts(cartData);
       }
     }
   }, []);

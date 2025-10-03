@@ -94,7 +94,6 @@ const AboutUs = () => {
             key={index}
             className="relative flex h-[40vh] md:h-[55vh] flex-col md:flex-row"
           >
-            {/* Texto */}
             <div
               className={`relative z-10 text-center gap-4 p-8 md:p-10 w-full md:w-1/2 h-full md:bg-slate-900 text-blue-50 text-sm md:text-lg flex flex-col justify-center ${
                 section.reverse ? "order-1" : "order-2"
@@ -106,7 +105,6 @@ const AboutUs = () => {
                 MORE INFORMATION
               </p>
             </div>
-            {/* Imagen de fondo solo en sm */}
             <div
               className="absolute inset-0 bg-cover bg-center md:hidden"
               style={{ backgroundImage: `url(${section.img})` }}
@@ -114,7 +112,6 @@ const AboutUs = () => {
               <div className="absolute inset-0 bg-black/40"></div>
             </div>
 
-            {/* Imagen lateral en md+ */}
             <div
               className={`relative w-1/2 min-h-[65vh] hidden md:block ${
                 section.reverse ? "order-2" : "order-1"
@@ -135,7 +132,6 @@ const AboutUs = () => {
             key={index}
             className="relative h-[40vh]  md:h-[55vh] flex flex-col md:flex-row"
           >
-            {/* Imagen de fondo solo en sm */}
             <div
               className="absolute inset-0  bg-cover bg-center md:hidden"
               style={{ backgroundImage: `url(${section.img})` }}
@@ -143,7 +139,6 @@ const AboutUs = () => {
               <div className="absolute inset-0 bg-black/40"></div>
             </div>
 
-            {/* Imagen lateral en md+ */}
             <div
               className={`relative w-1/2 max-h-[65vh] hidden md:block ${
                 section.reverse ? "order-2" : "order-1"
@@ -159,7 +154,6 @@ const AboutUs = () => {
               <div className="absolute inset-0 bg-black/10"></div>
             </div>
 
-            {/* Texto */}
             <div
               className={`relative z-10 text-center gap-4 p-8 md:p-10 w-full md:w-1/2 h-full  md:bg-slate-900 text-blue-50 text-sm md:text-lg flex flex-col justify-center ${
                 section.reverse ? "order-1" : "order-2"
