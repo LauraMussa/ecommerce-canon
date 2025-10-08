@@ -15,8 +15,8 @@ export const navigation = [
 ];
 
 export const navigationUser = [
-  { name: "My Cart", href: "/cart" },
   { name: "Shop", href: "/shop" },
+  { name: "My Cart", href: "/cart" },
   { name: "Dashboard", href: "/dashboard" },
 ];
 export const categories = [
@@ -120,19 +120,22 @@ export const aboutUsCards = [
 
 export const deliveryMethods = [
   {
-    id: "fedex",
+    name: "fedex",
     label: "Free Delivery - FedEx",
     description: "Get it by Friday, 13 Dec 2025",
+    id: 1,
   },
   {
-    id: "dhl",
+    name: "dhl",
     label: "$15 - DHL Fast Delivery",
     description: "Get it by Tomorrow",
+    id: 2,
   },
   {
-    id: "express",
+    name: "express",
     label: "$49 - Express Delivery",
     description: "Get it today",
+    id: 3,
   },
 ];
 
@@ -288,10 +291,9 @@ export const inspirations = [
     reverse: true,
   },
   {
-    subject: "MACRO PHOTOGRAPHY",
-    title: "PROFESSIONAL TOOLS",
-    text: `The Canon Macro Twin Lite MT-26EX-RT, flash heads provide greater
-              creative control for stunning macro shots.`,
+    subject: "CINEMATIC VISION",
+    title: "CAPTURE LIFE AS IT HAPPENS",
+    text: `Canon's video cameras are built to follow every story, every movement, with authentic visual impact.`,
     image: "/images/inspiration5.png",
     reverse: false,
   },

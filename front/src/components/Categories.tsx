@@ -96,7 +96,6 @@ export default function Categories() {
               />
               <div className="absolute bottom-4 left-4 text-white">
                 <h3 className="text-lg font-semibold">{categories[4].name}</h3>
-                <p>esteeeeee</p>
                 <p className="text-sm">{categories[4].description}</p>
               </div>
             </Link>

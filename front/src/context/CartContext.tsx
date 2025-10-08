@@ -32,6 +32,9 @@ interface CartProps {
   setError: Dispatch<SetStateAction<string | null>>;
   setDiscount: Dispatch<SetStateAction<number>>;
   discount: number;
+  setDelivery: Dispatch<SetStateAction<number>>;
+  delivery: number;
+  getFinalPrice: () => number;
 }
 
 const CartContext = createContext<CartProps>({
@@ -48,6 +51,9 @@ const CartContext = createContext<CartProps>({
   setError: () => {},
   setDiscount: () => 0,
   discount: 0,
+  setDelivery: () => 0,
+  delivery: 0,
+  getFinalPrice: () => 0,
 });
 
 interface CartProviderProps {
@@ -60,6 +66,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
   const [discount, setDiscount] = useState<number>(0);
+  const [delivery, setDelivery] = useState<number>(0);
 
   useEffect(() => {
     if (user) {
@@ -113,6 +120,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     return total;
   };
 
+  const getFinalPrice = () => {
+    const tax = getTotal() * 0.08;
+    const finalPrice = tax + getTotal() + delivery - discount;
+    return parseFloat(finalPrice.toFixed(2));
+  };
+
   const getProductCount = () => {
     return products.length;
   };
@@ -134,6 +147,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setError,
     setDiscount,
     discount,
+    delivery,
+    setDelivery,
+    getFinalPrice,
   };
 
   return <CartContext.Provider value={values}>{children}</CartContext.Provider>;

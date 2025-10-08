@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth } from "@/context/UserContext";
-
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 import { GoTrash } from "react-icons/go";
@@ -10,6 +9,7 @@ import Loader from "./Loader/Loader";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import { toastConfirm, toastError, toastSuccess } from "@/helpers/toast";
+
 const Cart = () => {
   const router = useRouter();
   const { user } = useAuth();
@@ -23,10 +23,6 @@ const Cart = () => {
     products,
     clearCart,
   } = useCart();
-
-  useEffect(() => {
-    if (!user) router.replace("/login");
-  }, [user, router]);
 
   const handleClear = () => {
     if (products.length > 0) {
@@ -42,6 +38,14 @@ const Cart = () => {
     }
   };
 
+  const handleCheckout = () => {
+    if (products.length > 0) {
+      router.push("/checkout");
+      return;
+    }
+    toastError("Your cart is empty");
+  };
+
   const handleDiscountChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDisabledBtn(false);
     if (e.target.value === "descuento10") {
@@ -55,6 +59,7 @@ const Cart = () => {
       setValidCupon(false);
     }
   };
+  
   const handleDiscoutn = () => {
     if (validCupon) {
       setDisabledBtn(true);
@@ -64,6 +69,11 @@ const Cart = () => {
       setDisabledBtn(false);
     }
   };
+
+
+  useEffect(() => {
+    if (!user) router.replace("/login");
+  }, [user, router]);
 
   return (
     <>
@@ -84,13 +94,13 @@ const Cart = () => {
 
             {products?.length ? (
               products?.map((p) => (
-                <li key={p.id} className="flex py-6 gap-6">
+                <li key={p.id} className="flex py-6 gap-6 px-2">
                   <Image
-                    width={100}
+                    width={80}
                     height={100}
                     src={p.image}
                     alt={p.name}
-                    className="h-24 w-24 bg-gray-700 p-2 rounded-md object-cover border border-gray-700"
+                    className="h-24 w-24 bg-gray-700 p-2 rounded-md border border-gray-700"
                   />
                   <div className="flex flex-1 flex-col">
                     <div className="flex justify-between">
@@ -138,12 +148,12 @@ const Cart = () => {
             >
               Clear Cart
             </button>
-            <Link
-              href={products.length > 0 ? "/checkout" : "/shop"}
+            <button
+              onClick={handleCheckout}
               className="w-full border-blue-500/50 text-center hover:scale-102 hover:border-blue-500 transition-all duration-200 border-1 cursor-pointer text-blue-50 py-3 rounded-lg mt-6 font-medium shadow-lg "
             >
               Checkout
-            </Link>
+            </button>
           </div>
           <div className="text-center mt-4">
             <Link

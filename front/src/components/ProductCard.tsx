@@ -47,9 +47,10 @@ const ProductCard = (product: ProductProps) => {
 
         <div className="flex gap-2 w-full items-center mt-4">
           <button
+            disabled={product.stock > 0 ? false : true}
             className="w-full flex items-center justify-center gap-2 bg-blue-900 text-blue-50 
                        hover:bg-transparent hover:text-blue-50/90 hover:border-blue-50 
-                       border border-transparent rounded-full p-2 transition cursor-pointer"
+                       border border-transparent rounded-full p-2 transition cursor-pointer disabled:bg-gray-400/20 disabled:hover:border-transparent disabled:hover:cursor-not-allowed"
             onClick={() => addToCart(product)}
           >
             <span>Add</span>

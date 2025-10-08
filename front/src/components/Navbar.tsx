@@ -15,8 +15,6 @@ import Image from "next/image";
 import { useAuth } from "@/context/UserContext";
 import { navigation, navigationUser } from "@/helpers/callouts";
 
-
-
 export default function Navbar() {
   const { user, logout } = useAuth();
   const pathname = usePathname();
@@ -81,7 +79,7 @@ export default function Navbar() {
                 <MenuItem>
                   <button
                     onClick={logout}
-                    className="w-full  px-4 py-2 text-sm text-gray-300 hover:bg-white/5 text-center"
+                    className="w-full cursor-pointer px-4 py-2 text-sm text-gray-300 hover:bg-white/5 text-center"
                   >
                     Log Out
                   </button>
@@ -109,7 +107,7 @@ export default function Navbar() {
                   : "text-blue-50 hover:underline"
               }`}
             >
-              Store
+              Shop
             </Link>
 
             <Link

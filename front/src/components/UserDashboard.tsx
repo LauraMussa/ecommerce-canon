@@ -32,7 +32,7 @@ export default function UserDashboard() {
       } catch (error) {
         if (error) setError(`Error loading orders`);
         console.log(error);
-      } 
+      }
     };
 
     fetchOrders();
@@ -40,6 +40,7 @@ export default function UserDashboard() {
 
   const totalOrder = (id: number) => {
     const order = orders.find((o) => o.id === id);
+
     return order?.products.reduce((total, item) => (total += item.price), 0);
   };
 

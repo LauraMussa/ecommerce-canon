@@ -7,13 +7,21 @@ import { useCart } from "@/context/CartContext";
 
 import { createOrdes } from "@/services/orders.service";
 import Image from "next/image";
-import { toastSuccess } from "@/helpers/toast";
+import { toastConfirm, toastSuccess } from "@/helpers/toast";
 import AddressSelector from "./AddressSelector";
 import PaymentMethods from "./PaymentMethods";
 import DeliveryMethods from "./DeliveryMethods";
 const Checkout = () => {
   const { user } = useAuth();
-  const { getIdProducts, products, getTotal, clearCart, discount } = useCart();
+  const {
+    getIdProducts,
+    products,
+    getTotal,
+    clearCart,
+    discount,
+    getFinalPrice,
+    delivery,
+  } = useCart();
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<string>("credit-card");
@@ -32,13 +40,12 @@ const Checkout = () => {
     user ? user.user.address : ""
   );
   const [selectedDelivery, setSelectedDelivery] = useState<string>("fedex");
-  
+
   useEffect(() => {
     if (!user) {
       router.replace("/");
     }
   }, [user, router]);
-  if (!user) return <Loader />;
 
   const handleOpen = () => {
     if (typeof window !== "undefined") {
@@ -66,32 +73,31 @@ const Checkout = () => {
     setFormData({ ...formData, street: "", city: "", country: "" });
   };
 
-  const finalPrice = () => {
-    const total = getTotal();
-    const tax = total * 0.08;
-    return total + tax - discount;
-  };
 
   const handleCheckout = async () => {
-    try {
-      if (!user?.token) {
-        throw new Error("No user token found");
+    toastConfirm("Proceed to payment?", async () => {
+      try {
+        if (!user?.token) {
+          throw new Error("No user token found");
+        }
+        if (products && products.length > 0) {
+          await createOrdes(user.token, getIdProducts());
+        }
+        clearCart();
+        toastSuccess("Purchase completed successfully!");
+        router.replace("/dashboard");
+      } catch (error) {
+        throw new Error(error as string);
       }
-      if (products && products.length > 0) {
-        await createOrdes(user.token, getIdProducts());
-      }
-      clearCart();
-      toastSuccess("Purchase completed successfully!");
-      router.replace("/dashboard");
-    } catch (error) {
-      throw new Error(error as string);
-    }
+    });
   };
+
+  if (!user) return <Loader />;
 
   return (
     <>
       {user ? (
-        <section className="text-blue-50 py-8 antialiased dark:bg-gray-900 mx-5 p-4 rounded-2xl mt-10 md:py-16">
+        <section className="text-blue-50 py-8 antialiased dark:bg-gray-900/70 mx-5 p-4 rounded-2xl mt-10 md:py-16">
           <form className="mx-auto min-h-screen max-w-screen-2xl flex justify-center  items-center 2xl:px-0">
             <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-15 xl:gap-40">
               <div className="min-w-0 flex-1 space-y-8">
@@ -147,7 +153,7 @@ const Checkout = () => {
                               src={item.image}
                               alt={item.name}
                               width={80}
-                              className="bg-gray-700 rounded-2xl p-2.5"
+                              className="bg-gray-700 h-20 w-21 rounded-2xl p-2"
                             />
                             <span>{item.name}</span>
                             <span>${item.price}</span>
@@ -179,13 +185,21 @@ const Checkout = () => {
                         $ {getTotal() * 0.08}
                       </dd>
                     </dl>
+                    <dl className="flex items-center justify-between gap-4 py-3">
+                      <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
+                        Delivery
+                      </dt>
+                      <dd className="text-base font-medium text-gray-900 dark:text-blue-50">
+                        $ {delivery}
+                      </dd>
+                    </dl>
 
                     <dl className="flex items-center justify-between gap-4 py-3">
                       <dt className="text-base font-bold text-gray-900 dark:text-blue-50">
                         Total
                       </dt>
                       <dd className="text-base font-bold text-gray-900 dark:text-blue-50">
-                        $ {finalPrice()}
+                        $ {getFinalPrice()}
                       </dd>
                     </dl>
                   </div>

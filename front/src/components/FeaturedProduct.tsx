@@ -27,8 +27,8 @@ const FeaturedProduct = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-[70rem] mx-auto mt-20 md:mt-30 text-blue-50 rounded-3xl overflow-hidden px-4 sm:px-6 md:px-8 lg:p-0 lg:pl-8 lg:bg-gray-900/70">
-      <section className="relative flex flex-col lg:flex-row  items-center justify-center min-h-[400px] md:min-h-[400px]">
+    <div className="w-full max-w-[60rem] mx-auto mt-20 md:mt-30 text-blue-50 rounded-3xl overflow-hidden px-4 sm:px-6 md:px-8 lg:p-0 lg:pl-8 lg:bg-gray-900/90">
+      <section className="relative flex flex-col lg:flex-row  items-center justify-center min-h-[400px] md:min-h-[200px]">
         <div className="absolute inset-0 rounded-3xl overflow-hidden lg:hidden">
           <Image
             src="/images/canonHero3.png"
@@ -40,8 +40,8 @@ const FeaturedProduct = () => {
           <div className="absolute inset-0 bg-black/50 rounded-3xl" />
         </div>
 
-        <div className="relative z-10 w-full lg:w-1/2 flex flex-col items-center justify-center text-center  pl-12">
-          <h2 className="text-3xl font-bold md:text-5xl mb-3">
+        <div className="relative z-10 w-full lg:w-1/2 flex flex-col items-center justify-center text-center ">
+          <h2 className="text-3xl font-medium md:text-5xl mb-3">
             Step Into Photography
           </h2>
           <p className="text-gray-300 hidden md:block md:text-[17px] mb-4">
