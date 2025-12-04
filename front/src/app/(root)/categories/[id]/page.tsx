@@ -72,7 +72,7 @@ const CategoryId = ({ params }: ParamProps) => {
     { name: "Objectives" },
   ];
 
-  const { id } = React.use(params) as { id: string }; 
+  const { id } = params as unknown as { id: string };
 
   const [products, setProducts] = useState<ProductProps[]>([]);
 
@@ -83,7 +83,7 @@ const CategoryId = ({ params }: ParamProps) => {
 
     const mappedProducts = filteredProducts.map((p, index) => ({
       ...p,
-      id: index + 1, 
+      id: index + 1,
     }));
 
     setProducts(mappedProducts);
